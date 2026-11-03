@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scene with Static Content - Scrollsequence Vanilla JS</title>
+    <meta name="description" content="Pinned canvas scene with negative bottom margin overlapped by a relatively positioned static content section in vanilla JavaScript." />
+    <link rel="stylesheet" href="scrollsequence/scrollsequence.css" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body class="min-h-screen bg-neutral-950 text-white">
+    <!-- Spacer before sequence -->
+    <section class="h-[50vh] flex flex-col items-center justify-center text-center px-4 text-neutral-400">
+      <p class="text-lg">Scroll down to start sequence ↓</p>
+      <p class="mt-2 text-sm text-neutral-500 max-w-md">
+        The Scene uses a negative bottom margin (-mb-[1500px]) so the following relative section scrolls directly over the pinned canvas.
+      </p>
+    </section>
+
+    <!-- Pinned Scrollsequence Scene with negative bottom margin matching its 1500px duration -->
+    <div
+      class="scrollsequence-scene -mb-[1500px]"
+      data-ssq-duration="1500"
+      data-ssq-content-animations='{"onScroll":[{"selector":".scene-hero-intro","track":{"0":{"opacity":1,"y":"0px","scale":1},"0.2":{"opacity":0,"y":"-60px","scale":0.95}}}]}'
+    >
+      <div class="scrollsequence-scene_inner">
+        <div class="scrollsequence-layer">
+          <div
+            class="scrollsequence-canvas2d"
+            data-ssq-media-groups='[{"type":"manifest","rootDir":"https://cdn.scrollsequence.com/2026-09/dna-blue/","imageSizes":{"1920":{"width":1920,"height":1080,"files":{"i":"1920/%04d.jpg"},"frameCount":293}}}]'
+          >
+            <canvas></canvas>
+          </div>
+        </div>
+
+        <!-- Initial Hero Layer that fades out as static content scrolls in -->
+        <div class="scrollsequence-layer" data-ssq-placement="center center">
+          <div class="scene-hero-intro text-center px-4">
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight">
+              Pinned Scene + Static Content
+            </h1>
+            <p class="mt-3 text-lg sm:text-xl text-neutral-300">
+              Keep scrolling — normal page content will glide over this pinned sequence
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Relative container that overlaps and scrolls over the pinned Scene -->
+    <section class="relative z-10 min-h-[1500px] max-w-5xl mx-auto px-6 py-24 flex flex-col justify-between pointer-events-none">
+      <div class="max-w-md p-6 rounded-2xl bg-neutral-900/80 backdrop-blur-md border border-white/10 shadow-2xl pointer-events-auto">
+        <span class="text-xs font-mono uppercase tracking-wider text-blue-400">
+          01 / Overlap Layout
+        </span>
+        <h2 class="mt-2 text-2xl font-bold">Depth Through Motion</h2>
+        <p class="mt-2 text-sm text-neutral-300 leading-relaxed">
+          Applying <code class="text-blue-300">-mb-[1500px]</code> on the Scene pulls this
+          <code class="text-blue-300">relative z-10</code> container directly over the sticky canvas timeline.
+        </p>
+      </div>
+
+      <div class="max-w-md self-end p-6 rounded-2xl bg-neutral-900/80 backdrop-blur-md border border-white/10 shadow-2xl pointer-events-auto">
+        <span class="text-xs font-mono uppercase tracking-wider text-blue-400">
+          02 / Native Flow
+        </span>
+        <h2 class="mt-2 text-2xl font-bold">Natural Document Scroll</h2>
+        <p class="mt-2 text-sm text-neutral-300 leading-relaxed">
+          Your cards, grids, and interactive components scroll at normal page speed while the background sequence scrubs at 60 FPS.
+        </p>
+      </div>
+
+      <div class="max-w-md p-6 rounded-2xl bg-neutral-900/80 backdrop-blur-md border border-white/10 shadow-2xl pointer-events-auto">
+        <span class="text-xs font-mono uppercase tracking-wider text-blue-400">
+          03 / Seamless Handoff
+        </span>
+        <h2 class="mt-2 text-2xl font-bold">Synchronized Unpinning</h2>
+        <p class="mt-2 text-sm text-neutral-300 leading-relaxed">
+          Matching <code class="text-blue-300">min-h-[1500px]</code> to the Scene duration ensures the background unpins right as this section finishes.
+        </p>
+      </div>
+    </section>
+
+    <!-- Spacer after sequence -->
+    <section class="h-screen flex items-center justify-center text-neutral-400">
+      <p class="text-lg">Sequence ended, continue reading...</p>
+    </section>
+
+    <script type="module">
+      import ScrollsequenceManager from 'scrollsequence';
+      import 'scrollsequence/scrollsequence.css';
+      ScrollsequenceManager.initialize().preloadAll();
+    </script>
+  </body>
+</html>
+

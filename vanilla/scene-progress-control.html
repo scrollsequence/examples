@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scene Progress Control - Scrollsequence Vanilla JS</title>
+    <meta name="description" content="Demonstration of manual scrubbing and programmatic progress control using Scrollsequence in vanilla JavaScript." />
+    <link rel="stylesheet" href="scrollsequence/scrollsequence.css" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body class="min-h-screen bg-neutral-950 text-white">
+    <!-- Floating Interactive Test Panel -->
+    <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-neutral-900/95 backdrop-blur-md border border-neutral-700 rounded-2xl p-4 shadow-2xl flex flex-col gap-3 text-xs font-sans max-w-md w-[92vw] sm:w-[460px]">
+      <div class="flex items-center justify-between border-b border-neutral-800 pb-2">
+        <span class="font-semibold text-neutral-200">Scene Progress Control (Vanilla JS)</span>
+        <button
+          id="prog-reset"
+          class="bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white px-3 py-1 rounded-md cursor-pointer font-medium transition-colors"
+        >
+          Reset to Scroll
+        </button>
+      </div>
+
+      <!-- Manual Scrub Slider -->
+      <div class="flex items-center justify-between gap-3">
+        <span class="text-neutral-400 font-medium">Slider:</span>
+        <input
+          type="range"
+          id="prog-slider"
+          min="0"
+          max="1"
+          step="0.001"
+          value="0"
+          aria-label="Scene progress control slider"
+          class="flex-1 accent-blue-500 cursor-pointer"
+        />
+        <span id="prog-val" class="font-mono text-neutral-300 w-12 text-right">scroll</span>
+      </div>
+    </div>
+
+    <!-- Spacer before sequence -->
+    <section class="h-[60vh] flex flex-col items-center justify-center text-center px-4 text-neutral-400">
+      <h2 class="text-xl font-semibold text-white">Scene Progress Control ↓</h2>
+      <p class="mt-2 text-sm max-w-lg">
+        Try to control scene progress via slider. Can be mapped to any custom progress.
+      </p>
+    </section>
+
+    <!-- Pinned Scrollsequence Scene with Content Animations -->
+    <div
+      class="scrollsequence-scene"
+      id="my-scene"
+      data-ssq-content-animations='{"onScroll":[{"selector":".animation-attached-to-global-scene-progress","track":{"0":{"width":"calc(0% + 2px)"},"1":{"width":"calc(100% - 2px)"}}}]}'
+    >
+      <div class="scrollsequence-scene_inner">
+        <!-- Canvas Layer with Dual Media Groups -->
+        <div class="scrollsequence-layer">
+          <div
+            class="scrollsequence-canvas2d"
+            data-ssq-disable-depthmaps="true"
+            data-ssq-media-groups='[{"type":"manifest","rootDir":"https://cdn.scrollsequence.com/2026-09/dna-blue/","imageSizes":{"1920":{"width":1920,"height":1080,"files":{"i":"1920/%04d.jpg"},"frameCount":293}},"contentAnimations":{"onScroll":[{"selector":".animation-attached-to-first-media-group","track":{"0":{"opacity":0,"y":"100px","scale":0.8},"0.25":{"opacity":1,"y":"0px","scale":1},"0.75":{"opacity":1,"y":"0px","scale":1},"1":{"opacity":0,"y":"-100px","scale":0.8}}}]}},{"type":"manifest","rootDir":"https://cdn.scrollsequence.com/2026-09/dna-red/","isReverse":true,"imageSizes":{"1920":{"width":1920,"height":1080,"files":{"i":"1920/%04d.jpg"},"frameCount":293}}}]'
+          >
+            <canvas></canvas>
+          </div>
+        </div>
+
+        <!-- Global Progress Bar Layer -->
+        <div class="scrollsequence-layer" data-ssq-placement="top left">
+          <div class="w-full">
+            <div class="animation-attached-to-global-scene-progress h-1 bg-red-500"></div>
+          </div>
+        </div>
+
+        <!-- Dynamic Animated Text Layer -->
+        <div class="scrollsequence-layer" data-ssq-placement="center center">
+          <div class="animation-attached-to-first-media-group text-center px-4">
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight">
+              Animate Any HTML Content
+            </h1>
+            <p class="mt-3 text-lg sm:text-xl text-neutral-300">
+              Sync typography, UI layers, and progress indicators directly to scroll
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacer after sequence -->
+    <section class="h-screen flex items-center justify-center text-neutral-400">
+      <p class="text-lg">Sequence ended, continue reading...</p>
+    </section>
+
+    <script type="module">
+      import ScrollsequenceManager from 'scrollsequence';
+      import 'scrollsequence/scrollsequence.css';
+
+      ScrollsequenceManager.initialize().preloadAll();
+
+      const sceneEl = document.getElementById('my-scene');
+      const sceneBlock = ScrollsequenceManager.getBlock(sceneEl);
+
+      const slider = document.getElementById('prog-slider');
+      const valLabel = document.getElementById('prog-val');
+      const resetBtn = document.getElementById('prog-reset');
+
+      slider.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        sceneBlock?.progress(val);
+        valLabel.textContent = val.toFixed(3);
+      });
+
+      resetBtn.addEventListener('click', () => {
+        sceneBlock?.progress(null);
+        valLabel.textContent = 'scroll';
+      });
+    </script>
+  </body>
+</html>

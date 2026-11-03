@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scene Depth Parallax - Scrollsequence React</title>
+    <meta name="description" content="Scrollsequence React example demonstrating 2.5D depth map parallax effects with scroll-driven image sequence." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import React from 'react';
+      import ReactDOM from 'react-dom/client';
+      import './src/index.css';
+      import SceneDepth from './src/examples/SceneDepth';
+
+      ReactDOM.createRoot(document.getElementById('root')).render(
+        React.createElement(React.StrictMode, null, React.createElement(SceneDepth))
+      );
+    </script>
+  </body>
+</html>

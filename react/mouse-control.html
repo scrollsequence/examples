@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Movement Control - Scrollsequence React</title>
+    <meta name="description" content="Scrollsequence React example demonstrating sequence scrub controlled by mouse movement: top is 0, bottom is 1." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import React from 'react';
+      import ReactDOM from 'react-dom/client';
+      import './src/index.css';
+      import MouseControl from './src/examples/MouseControl';
+
+      ReactDOM.createRoot(document.getElementById('root')).render(
+        React.createElement(React.StrictMode, null, React.createElement(MouseControl))
+      );
+    </script>
+  </body>
+</html>

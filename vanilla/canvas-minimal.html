@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas 2D Minimal - Scrollsequence Vanilla JS</title>
+    <meta name="description" content="Minimal Scrollsequence Vanilla JS example of unpinned scroll-driven HTML5 canvas image sequence playback." />
+    <link rel="stylesheet" href="scrollsequence/scrollsequence.css" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body class="min-h-screen bg-neutral-950 text-white">
+    <!-- Spacer before sequence -->
+    <section class="h-[50vh] flex items-center justify-center text-neutral-400">
+      <p class="text-lg">Scroll down to start sequence ↓</p>
+    </section>
+
+    <!-- Scrollsequence Canvas2D Element -->
+    <div
+      class="scrollsequence-canvas2d"
+      data-ssq-media-groups='[{"type":"manifest","rootDir":"https://cdn.scrollsequence.com/2026-09/dna-blue/","imageSizes":{"1920":{"width":1920,"height":1080,"files":{"i":"1920/%04d.jpg"},"frameCount":293}}}]'
+    >
+      <canvas></canvas>
+    </div>
+
+    <!-- Spacer after sequence -->
+    <section class="h-screen flex items-center justify-center text-neutral-400">
+      <p className="text-lg">Sequence ended, continue reading...</p>
+    </section>
+
+    <script type="module">
+      import ScrollsequenceManager from 'scrollsequence';
+      import 'scrollsequence/scrollsequence.css';
+      ScrollsequenceManager.initialize().preloadAll();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "scrollsequence-example-content-animations",
+  "private": true,
+  "version": "2.0.0-beta.53",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "scrollsequence": "2.0.0-beta.53"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "typescript": "^5.7.0",
+    "vite": "^8.3.0"
+  }
+}

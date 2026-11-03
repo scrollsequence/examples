@@ -1,0 +1,40 @@
+# Scrollsequence Examples & API Reference
+> High-performance image sequence animation library for React and Vanilla JavaScript.
+
+Scrollsequence turns standard frame-extracted image sequences (e.g. from MP4 or 3D renders) into buttery-smooth, hardware-accelerated 60fps scrub animations driven by page scroll or autoplay.
+
+## Core Rules for Code Generation
+0. **Installation (Public Beta):**
+   `npm install scrollsequence@https://docs.scrollsequence.com/scrollsequence-2.0.0-beta.53.tgz`
+   (Standard imports like `scrollsequence/react` or `scrollsequence` apply once installed).
+1. **Framework Entrypoints:**
+   - React: `import { Canvas2d, Scene, Layer } from 'scrollsequence/react';`
+   - Vanilla: `import ScrollsequenceManager from 'scrollsequence';`
+2. **Media Group Format:**
+   ```json
+   {
+     "type": "manifest",
+     "rootDir": "https://cdn.example.com/sequence-folder/",
+     "imageSizes": {
+       "1920": {
+         "width": 1920,
+         "height": 1080,
+         "files": {
+           "i": "1920/%04d.jpg"
+         },
+         "frameCount": 293
+       }
+     }
+   }
+   ```
+3. **Depth Maps (Parallax):**
+   Add `"d": "depthmaps/%04d.jpg"` inside the `files` object next to `"i"`.
+
+## Directory Index
+- `react/src/examples/CanvasMinimal.tsx`: Basic Canvas2D frame scrubbing without pinning.
+- `react/src/examples/SceneMinimal.tsx`: Sticky pinned scene with canvas sequence and overlay typography.
+- `react/src/examples/SceneContent.tsx`: Sticky pinned scene with content animations synced to scroll progress and media group progress.
+- `react/src/examples/SceneDepth.tsx`: Hardware-accelerated depth map parallax effect.
+- `vanilla/canvas-minimal.html`: Vanilla JS basic canvas scrubbing.
+- `vanilla/scene-minimal.html`: Vanilla JS pinned scene with HTML layer.
+- `vanilla/static/canvas-minimal-cdn.html`: Zero-build standalone HTML file using CDN scripts.

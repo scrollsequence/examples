@@ -1,0 +1,102 @@
+{
+  "version": "2.0.0-beta.52",
+  "input": {
+    "path": "source-dna-red.mp4",
+    "width": 2560,
+    "height": 1440,
+    "frameCount": 293
+  },
+  "imageSizes": {
+    "1280": {
+      "width": 1280,
+      "height": 720,
+      "files": {
+        "i": "1280/%04d.jpg",
+        "d": "depthmaps/%04d.jpg"
+      },
+      "frameCount": 293
+    },
+    "1920": {
+      "width": 1920,
+      "height": 1080,
+      "files": {
+        "i": "1920/%04d.jpg",
+        "d": "depthmaps/%04d.jpg"
+      },
+      "frameCount": 293
+    }
+  },
+  "vision": {
+    "subjects": [
+      {
+        "subject_id": "dna_strand_black",
+        "description": "DNA strand-like structure, black.",
+        "location": [
+          0.5,
+          0.5
+        ],
+        "movement": "dissolves outwards, upward motion",
+        "rotation": "rotates on Y-axis",
+        "entry_frame": 0,
+        "exit_frame": 1
+      },
+      {
+        "subject_id": "dna_strand_orange",
+        "description": "DNA strand-like structure, orange.",
+        "location": [
+          0.5,
+          0.5
+        ],
+        "movement": "appears, subtle upward motion",
+        "rotation": "rotates on Y-axis",
+        "entry_frame": 0,
+        "exit_frame": 1
+      },
+      {
+        "subject_id": "debris_black",
+        "description": "Scattered black fragments.",
+        "location": [
+          0.5,
+          0.5
+        ],
+        "movement": "expands outwards, upward motion",
+        "rotation": "random",
+        "entry_frame": 0,
+        "exit_frame": 1
+      }
+    ],
+    "camera_movement": "slight zoom out, slow rotation around Y-axis",
+    "camera_framing": "medium close-up",
+    "shot_type": "3D render",
+    "scene_background": "dark red to light red gradient",
+    "dominant_colors": [
+      "#8B0000",
+      "#FF4500",
+      "#1A1A1A"
+    ],
+    "lighting": "soft, from top-left, highlights materials",
+    "depth_relationships": "orange strand behind black strand initially, then interweaving",
+    "significant_events": [
+      {
+        "event_description": "Black DNA starts fragmenting",
+        "timestamp": 0
+      },
+      {
+        "event_description": "Orange DNA begins to be fully revealed",
+        "timestamp": 0.2
+      },
+      {
+        "event_description": "Black fragments scatter more widely",
+        "timestamp": 0.4
+      },
+      {
+        "event_description": "Orange DNA helix structure fully visible",
+        "timestamp": 0.6
+      },
+      {
+        "event_description": "Black fragments continue expanding",
+        "timestamp": 0.8
+      }
+    ]
+  }
+}

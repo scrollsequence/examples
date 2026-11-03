@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas 2D Minimal - Scrollsequence React</title>
+    <meta name="description" content="Minimal Scrollsequence React example of unpinned scroll-driven HTML5 canvas image sequence playback." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import React from 'react';
+      import ReactDOM from 'react-dom/client';
+      import './src/index.css';
+      import CanvasMinimal from './src/examples/CanvasMinimal';
+
+      ReactDOM.createRoot(document.getElementById('root')).render(
+        React.createElement(React.StrictMode, null, React.createElement(CanvasMinimal))
+      );
+    </script>
+  </body>
+</html>

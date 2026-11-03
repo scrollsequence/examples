@@ -1,0 +1,117 @@
+{
+  "version": "2.0.0-beta.52",
+  "input": {
+    "path": "source-dna-blue.mp4",
+    "width": 1920,
+    "height": 1080,
+    "frameCount": 293
+  },
+  "imageSizes": {
+    "1280": {
+      "width": 1280,
+      "height": 720,
+      "files": {
+        "i": "1280/%04d.jpg"
+      },
+      "frameCount": 293
+    },
+    "1920": {
+      "width": 1920,
+      "height": 1080,
+      "files": {
+        "i": "1920/%04d.jpg"
+      },
+      "frameCount": 293
+    }
+  },
+  "vision": {
+    "subjects": [
+      {
+        "subject_id": "dna_strand_black",
+        "description": "Black DNA strand",
+        "location": [
+          0.5,
+          0.5
+        ],
+        "movement": "moves into background",
+        "rotation": "rotates right",
+        "entry_frame": 0,
+        "exit_frame": 1
+      },
+      {
+        "subject_id": "dna_strand_yellow",
+        "description": "Yellow DNA strand forming",
+        "location": [
+          0.5,
+          0.5
+        ],
+        "movement": "expands, moves foreground",
+        "rotation": "rotates right",
+        "entry_frame": 0,
+        "exit_frame": 1
+      },
+      {
+        "subject_id": "particles_red",
+        "description": "Small red particles",
+        "location": [
+          0.5,
+          0.5
+        ],
+        "movement": "floating, subtle",
+        "rotation": "none",
+        "entry_frame": 0,
+        "exit_frame": 1
+      },
+      {
+        "subject_id": "debris_black",
+        "description": "Black debris from dissolving DNA",
+        "location": [
+          0.5,
+          0.5
+        ],
+        "movement": "expands outwards",
+        "rotation": "random",
+        "entry_frame": 0.4,
+        "exit_frame": 1
+      }
+    ],
+    "camera_movement": "slight dolly out, pan right",
+    "camera_framing": "medium shot, close-up details",
+    "shot_type": "dynamic macro shot",
+    "scene_background": "dark blue with subtle glow",
+    "dominant_colors": [
+      "dark_blue",
+      "black",
+      "yellow",
+      "red"
+    ],
+    "lighting": "directional light from right, highlights",
+    "depth_relationships": "clear foreground (DNA), blurred background",
+    "significant_events": [
+      {
+        "description": "Black DNA strand appears",
+        "timestamp": 0
+      },
+      {
+        "description": "Red particles become visible",
+        "timestamp": 0.083
+      },
+      {
+        "description": "Black DNA begins to dissolve",
+        "timestamp": 0.35
+      },
+      {
+        "description": "Yellow DNA strand starts forming",
+        "timestamp": 0.417
+      },
+      {
+        "description": "Yellow DNA fully formed",
+        "timestamp": 0.75
+      },
+      {
+        "description": "Debris disperses around DNA",
+        "timestamp": 0.833
+      }
+    ]
+  }
+}

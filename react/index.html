@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrollsequence React Examples</title>
+    <meta name="description" content="Interactive examples and showcase for Scrollsequence React, featuring high-performance canvas image sequence animations." />
+    <link rel="stylesheet" href="./src/index.css" />
+  </head>
+  <body class="min-h-screen bg-neutral-950 text-neutral-100 p-8 sm:p-12">
+    <header class="max-w-5xl mx-auto mb-12">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-blue-500/20 text-blue-400 rounded-full border border-blue-500/30">
+          React Showcase
+        </span>
+        <span class="text-xs text-neutral-400">Vite + Tailwind CSS v4</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
+        Scrollsequence React Examples
+      </h1>
+      <p class="mt-3 text-lg text-neutral-400 max-w-2xl">
+        High-performance image sequence animation components. Click any demo below to test the full-page experience.
+      </p>
+    </header>
+
+    <main class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a
+        href="./canvas-minimal.html"
+        class="group block p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-blue-500/50 hover:bg-neutral-850 transition-all shadow-lg hover:shadow-blue-500/5"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
+            Basics
+          </span>
+          <span class="text-xs text-neutral-500">Beginner</span>
+        </div>
+        <h2 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          Canvas 2D Minimal
+        </h2>
+        <p class="mt-2 text-sm text-neutral-400 leading-relaxed">
+          Direct Canvas2D frame scrubbing without scene pinning. Lightweight image sequence playback driven by page scroll.
+        </p>
+        <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
+          <code class="font-mono text-neutral-400">src/examples/CanvasMinimal.tsx</code>
+          <span class="text-blue-400 font-medium group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+            Open Demo →
+          </span>
+        </div>
+      </a>
+
+      <a
+        href="./scene-minimal.html"
+        class="group block p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-blue-500/50 hover:bg-neutral-850 transition-all shadow-lg hover:shadow-blue-500/5"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
+            Hero Sections
+          </span>
+          <span class="text-xs text-neutral-500">Beginner</span>
+        </div>
+        <h2 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          Pinned Scene Showcase
+        </h2>
+        <p class="mt-2 text-sm text-neutral-400 leading-relaxed">
+          Sticky viewport-pinned section with hardware-accelerated canvas background and synchronized typography overlay.
+        </p>
+        <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
+          <code class="font-mono text-neutral-400">src/examples/SceneMinimal.tsx</code>
+          <span class="text-blue-400 font-medium group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+            Open Demo →
+          </span>
+        </div>
+      </a>
+
+      <a
+        href="./scene-content.html"
+        class="group block p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-blue-500/50 hover:bg-neutral-850 transition-all shadow-lg hover:shadow-blue-500/5"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
+            Animations
+          </span>
+          <span class="text-xs text-neutral-500">Intermediate</span>
+        </div>
+        <h2 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          HTML Content Animations
+        </h2>
+        <p class="mt-2 text-sm text-neutral-400 leading-relaxed">
+          Dynamic HTML text and progress bar animations synchronized with global scene progress and media group progress.
+        </p>
+        <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
+          <code class="font-mono text-neutral-400">src/examples/SceneContent.tsx</code>
+          <span class="text-blue-400 font-medium group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+            Open Demo →
+          </span>
+        </div>
+      </a>
+
+      <a
+        href="./scene-depth.html"
+        class="group block p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-blue-500/50 hover:bg-neutral-850 transition-all shadow-lg hover:shadow-blue-500/5"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
+            Advanced
+          </span>
+          <span class="text-xs text-neutral-500">Intermediate</span>
+        </div>
+        <h2 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          Depth Map Parallax
+        </h2>
+        <p class="mt-2 text-sm text-neutral-400 leading-relaxed">
+          2.5D depth map simulation providing realistic tilt and camera motion parallax during scroll scrubbing.
+        </p>
+        <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
+          <code class="font-mono text-neutral-400">src/examples/SceneDepth.tsx</code>
+          <span class="text-blue-400 font-medium group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+            Open Demo →
+          </span>
+        </div>
+      </a>
+
+      <a
+        href="./scene-progress-control.html"
+        class="group block p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-blue-500/50 hover:bg-neutral-850 transition-all shadow-lg hover:shadow-blue-500/5"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
+            Interactive
+          </span>
+          <span class="text-xs text-neutral-500">Intermediate</span>
+        </div>
+        <h2 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          Scene Progress Control
+        </h2>
+        <p class="mt-2 text-sm text-neutral-400 leading-relaxed">
+          High-performance sequence scrubbing controlled imperatively via React useRef and useImperativeHandle with instant scroll reset.
+        </p>
+        <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
+          <code class="font-mono text-neutral-400">src/examples/SceneProgressControl.tsx</code>
+          <span class="text-blue-400 font-medium group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+            Open Demo →
+          </span>
+        </div>
+      </a>
+
+      <a
+        href="./mouse-control.html"
+        class="group block p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-blue-500/50 hover:bg-neutral-850 transition-all shadow-lg hover:shadow-blue-500/5"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
+            Mouse Tracking
+          </span>
+          <span class="text-xs text-neutral-500">Interactive</span>
+        </div>
+        <h2 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+          Mouse Movement Control
+        </h2>
+        <p class="mt-2 text-sm text-neutral-400 leading-relaxed">
+          Dynamic vertical mouse tracking: mouse up maps to progress 0, mouse down maps to progress 1 with zero React re-renders.
+        </p>
+        <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
+          <code class="font-mono text-neutral-400">src/examples/MouseControl.tsx</code>
+          <span class="text-blue-400 font-medium group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+            Open Demo →
+          </span>
+        </div>
+      </a>
+    </main>
+  </body>
+</html>

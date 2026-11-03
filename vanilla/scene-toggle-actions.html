@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scene Toggle Actions - Scrollsequence Vanilla JS</title>
+    <meta name="description" content="Scroll threshold toggle actions (play, reverse, reset) on HTML content layers using Scrollsequence in vanilla JavaScript." />
+    <link rel="stylesheet" href="scrollsequence/scrollsequence.css" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body class="min-h-screen bg-neutral-950 text-white">
+    <!-- Spacer before sequence -->
+    <section class="h-[50vh] flex flex-col items-center justify-center text-center px-4 text-neutral-400">
+      <h2 class="text-xl font-semibold text-white">Scroll down to test Toggle Actions ↓</h2>
+      <p class="mt-2 text-sm max-w-lg text-neutral-400">
+        Instead of scrubbing opacity frame-by-frame, <code class="text-blue-400">autoplay</code> inside
+        <code class="text-blue-400">onScroll</code> triggers time-based animations (`play`, `reverse`, `reset`)
+        when crossing scroll thresholds.
+      </p>
+    </section>
+
+    <!-- Pinned Scrollsequence Scene with Toggle Action Content Animations -->
+    <div
+      class="scrollsequence-scene"
+      data-ssq-trigger-start="1"
+      data-ssq-trigger-end="0"
+      data-ssq-content-animations='{"onScroll":[{"selector":".scene-progress-bar","track":{"0":{"width":"0%"},"1":{"width":"100%"}}},{"selector":".toggle-card-1","track":{"0":{"autoAlpha":0,"y":"40px","scale":0.92},"1":{"autoAlpha":1,"y":"0px","scale":1}},"options":{"duration":0.45,"ease":"easeOut"},"autoplay":{"start":0.15,"end":0.55,"onEnter":"play","onLeave":"reverse","onEnterBack":"play","onLeaveBack":"reverse"}},{"selector":".toggle-card-2","track":{"0":{"autoAlpha":0,"y":"40px","scale":0.92},"1":{"autoAlpha":1,"y":"0px","scale":1}},"options":{"duration":0.45,"ease":"easeOut"},"autoplay":{"start":0.55,"end":0.9,"onEnter":"play","onLeave":"reset","onEnterBack":"play","onLeaveBack":"reverse"}}]}'
+    >
+      <div class="scrollsequence-scene_inner">
+        <div class="scrollsequence-layer">
+          <div
+            class="scrollsequence-canvas2d"
+            data-ssq-media-groups='[{"type":"manifest","rootDir":"https://cdn.scrollsequence.com/2026-09/dna-blue/","imageSizes":{"1920":{"width":1920,"height":1080,"files":{"i":"1920/%04d.jpg"},"frameCount":293}}}]'
+          >
+            <canvas></canvas>
+          </div>
+        </div>
+
+        <!-- Top Progress Bar with Threshold Markers (15%, 55%, 90%) -->
+        <div class="scrollsequence-layer" data-ssq-placement="top left">
+          <div class="w-full bg-neutral-900/90 backdrop-blur-sm border-b border-white/10 pb-6 pt-2 px-0 relative">
+            <div class="w-full h-1.5 bg-neutral-800 relative">
+              <div class="scene-progress-bar h-full bg-blue-500"></div>
+              <div class="absolute top-0 bottom-0 left-[15%] w-0.5 bg-emerald-400">
+                <span class="absolute top-2.5 -translate-x-1/2 text-[10px] font-mono text-emerald-400 whitespace-nowrap">
+                  15% (Card 1 Start)
+                </span>
+              </div>
+              <div class="absolute top-0 bottom-0 left-[55%] w-0.5 bg-amber-400">
+                <span class="absolute top-2.5 -translate-x-1/2 text-[10px] font-mono text-amber-400 whitespace-nowrap">
+                  55% (Swap)
+                </span>
+              </div>
+              <div class="absolute top-0 bottom-0 left-[90%] w-0.5 bg-rose-400">
+                <span class="absolute top-2.5 -translate-x-1/2 text-[10px] font-mono text-rose-400 whitespace-nowrap">
+                  90% (Card 2 End)
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Threshold-Triggered Cards -->
+        <div class="scrollsequence-layer" data-ssq-placement="center center">
+          <div class="w-full max-w-3xl px-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Card 1 -->
+            <div class="toggle-card-1 p-6 rounded-2xl bg-neutral-900/85 backdrop-blur-md border border-emerald-500/30 shadow-2xl">
+              <div class="flex items-center justify-between text-xs font-mono text-emerald-400 mb-2">
+                <span>Card 01</span>
+                <span>0.15 → 0.55</span>
+              </div>
+              <h3 class="text-xl font-bold text-white">Smooth Play & Reverse</h3>
+              <p class="mt-2 text-sm text-neutral-300 leading-relaxed">
+                Triggers <code class="text-emerald-300">play</code> at 15% and smoothly
+                <code class="text-emerald-300">reverse</code>s out at 55% over 0.45s.
+              </p>
+              <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-neutral-400">
+                play / reverse / play / reverse
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="toggle-card-2 p-6 rounded-2xl bg-neutral-900/85 backdrop-blur-md border border-amber-500/30 shadow-2xl">
+              <div class="flex items-center justify-between text-xs font-mono text-amber-400 mb-2">
+                <span>Card 02</span>
+                <span>0.55 → 0.90</span>
+              </div>
+              <h3 class="text-xl font-bold text-white">Play & Instant Reset</h3>
+              <p class="mt-2 text-sm text-neutral-300 leading-relaxed">
+                Triggers <code class="text-amber-300">play</code> at 55% and snaps to
+                <code class="text-amber-300">reset</code> immediately when crossing 90%.
+              </p>
+              <div class="mt-4 pt-3 border-t border-white/10 text-[11px] font-mono text-neutral-400">
+                play / reset / play / reverse
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacer after sequence -->
+    <section class="h-screen flex items-center justify-center text-neutral-400">
+      <p class="text-lg">Sequence ended, continue reading...</p>
+    </section>
+
+    <script type="module">
+      import ScrollsequenceManager from 'scrollsequence';
+      import 'scrollsequence/scrollsequence.css';
+      ScrollsequenceManager.initialize().preloadAll();
+    </script>
+  </body>
+</html>
+

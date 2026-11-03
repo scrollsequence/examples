@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrollsequence CDN Minimal Demo</title>
+    <meta name="description" content="Zero-build standalone demo of Scrollsequence canvas animation using CDN distribution in plain HTML and JavaScript." />
+    <!-- Standalone CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scrollsequence@2.0.0-beta.52/dist/scrollsequence.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #0a0a0a;
+        color: #fff;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      .spacer {
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="spacer">
+      <p>Scroll down to start sequence ↓</p>
+    </div>
+
+    <!-- NOT READY - WORK IN PROGRESS !!! (attributes/defaults are messed up) + no jsdelivr atm-->
+    <!-- NOT READY - WORK IN PROGRESS !!! (attributes/defaults are messed up) + no jsdelivr atm-->
+    <!-- NOT READY - WORK IN PROGRESS !!! (attributes/defaults are messed up) + no jsdelivr atm-->
+
+
+
+    <!-- Scrollsequence Canvas Element -->
+    <div
+      class="scrollsequence-canvas2d"
+      data-ssq-media-groups='[{"type":"manifest","rootDir":"https://cdn.scrollsequence.com/2026-09/dna-blue/","imageSizes":{"1920":{"width":1920,"height":1080,"files":{"i":"1920/%04d.jpg"},"frameCount":293}}}]'
+    >
+      <canvas></canvas>
+    </div>
+
+    <div class="spacer" style="height: 100vh;">
+      <p>Sequence ended, continue reading...</p>
+    </div>
+
+    <!-- Standalone Scrollsequence Bundle -->
+    <script type="module">
+      import ScrollsequenceManager from 'https://cdn.jsdelivr.net/npm/scrollsequence@2.0.0-beta.52/dist/esm/vanilla/index.js';
+      ScrollsequenceManager.initialize().preloadAll();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrollsequence Vanilla JS Examples</title>
+    <meta name="description" content="High-performance canvas image sequence animation examples and interactive demos built with vanilla JavaScript." />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body class="min-h-screen bg-neutral-950 text-neutral-100 p-8 sm:p-12">
+    <header class="max-w-5xl mx-auto mb-12">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider bg-amber-500/20 text-amber-400 rounded-full border border-amber-500/30">
+          Vanilla JS Showcase
+        </span>
+        <span class="text-xs text-neutral-400">ES Modules + Zero-Build CDN</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
+        Scrollsequence Vanilla Examples
+      </h1>
+      <p class="mt-3 text-lg text-neutral-400 max-w-2xl">
+        High-performance canvas sequence animations without any framework. Click below to inspect each interactive demo.
+      </p>
+    </header>
+
+    <main class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a
+        href="./canvas-minimal.html"
+        class="group block p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 hover:bg-neutral-850 transition-all shadow-lg hover:shadow-amber-500/5"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
+            Basics
+          </span>
+          <span class="text-xs text-neutral-500">Beginner</span>
+        </div>
+        <h2 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+          Canvas 2D Minimal
+        </h2>
+        <p class="mt-2 text-sm text-neutral-400 leading-relaxed">
+          Standard HTML element with data-ssq attributes scrubbing frames cleanly as the user scrolls.
+        </p>
+        <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
+          <code class="font-mono text-neutral-400">canvas-minimal.html</code>
+          <span class="text-amber-400 font-medium group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+            Open Demo →
+          </span>
+        </div>
+      </a>
+
+      <a
+        href="./scene-minimal.html"
+        class="group block p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 hover:bg-neutral-850 transition-all shadow-lg hover:shadow-amber-500/5"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
+            Hero Sections
+          </span>
+          <span class="text-xs text-neutral-500">Beginner</span>
+        </div>
+        <h2 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+          Pinned Scene Showcase
+        </h2>
+        <p class="mt-2 text-sm text-neutral-400 leading-relaxed">
+          Viewport-pinned scene container with canvas background and overlaid typography layers.
+        </p>
+        <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
+          <code class="font-mono text-neutral-400">scene-minimal.html</code>
+          <span class="text-amber-400 font-medium group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+            Open Demo →
+          </span>
+        </div>
+      </a>
+
+      <a
+        href="./scene-progress-control.html"
+        class="group block p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-amber-500/50 hover:bg-neutral-850 transition-all shadow-lg hover:shadow-amber-500/5"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-neutral-800 text-neutral-300 border border-neutral-700">
+            Interactive
+          </span>
+          <span class="text-xs text-neutral-500">Intermediate</span>
+        </div>
+        <h2 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+          Scene Progress Control
+        </h2>
+        <p class="mt-2 text-sm text-neutral-400 leading-relaxed">
+          Control sequence scrubbing imperatively with a progress slider or custom inputs, with instant scroll reset.
+        </p>
+        <div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
+          <code class="font-mono text-neutral-400">scene-progress-control.html</code>
+          <span class="text-amber-400 font-medium group-hover:translate-x-0.5 transition-transform inline-flex items-center gap-1">
+            Open Demo →
+          </span>
+        </div>
+      </a>
+    </main>
+
+    <footer class="max-w-5xl mx-auto mt-16 pt-8 border-t border-neutral-800 text-neutral-500 text-sm flex items-center justify-between">
+      <span>Zero-build CDN versions available in <code class="font-mono text-neutral-400">vanilla/static/</code></span>
+      <a href="./static/canvas-minimal-cdn.html" class="text-amber-400 hover:underline">View CDN Static Demo →</a>
+    </footer>
+  </body>
+</html>

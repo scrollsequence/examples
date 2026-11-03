@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Scene - Scrollsequence Vanilla JS</title>
+    <meta name="description" content="Responsive pinned canvas scene example loading different image sequences and text on mobile vs desktop in vanilla JavaScript." />
+    <link rel="stylesheet" href="scrollsequence/scrollsequence.css" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body class="min-h-screen bg-neutral-950 text-white">
+    <!-- Spacer before sequence -->
+    <section class="h-[50vh] flex flex-col items-center justify-center text-center px-4 text-neutral-400">
+      <p class="text-lg">Scroll down to start sequence ↓</p>
+      <p class="mt-2 text-sm text-neutral-500">
+        Resize your browser across 768px to switch between Mobile (Red) and Desktop (Blue).
+      </p>
+    </section>
+
+    <!-- Pinned Scrollsequence Scene -->
+    <div class="scrollsequence-scene">
+      <div class="scrollsequence-scene_inner">
+        <div class="scrollsequence-layer">
+          <div class="scrollsequence-canvas2d" id="responsive-canvas">
+            <canvas></canvas>
+          </div>
+        </div>
+        <div class="scrollsequence-layer" data-ssq-placement="center center">
+          <div class="text-center px-4">
+            <h1 id="responsive-title" class="text-4xl sm:text-6xl font-extrabold tracking-tight">
+              Responsive Scroll!
+            </h1>
+            <p id="responsive-subtitle" class="mt-3 text-lg sm:text-xl text-neutral-300">
+              60 FPS Hardware-Accelerated Scrubbing
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacer after sequence -->
+    <section class="h-screen flex items-center justify-center text-neutral-400">
+      <p class="text-lg">Sequence ended, continue reading...</p>
+    </section>
+
+    <script type="module">
+      import ScrollsequenceManager from 'scrollsequence';
+      import 'scrollsequence/scrollsequence.css';
+
+      const imageSizes = {
+        1280: { width: 1280, height: 720, files: { i: '1280/%04d.jpg' }, frameCount: 293 },
+        1920: { width: 1920, height: 1080, files: { i: '1920/%04d.jpg' }, frameCount: 293 },
+      };
+
+      const desktopMediaGroups = [
+        {
+          type: 'manifest',
+          rootDir: 'https://cdn.scrollsequence.com/2026-09/dna-blue/',
+          imageSizes,
+        },
+      ];
+
+      const mobileMediaGroups = [
+        {
+          type: 'manifest',
+          rootDir: 'https://cdn.scrollsequence.com/2026-09/dna-red/',
+          imageSizes,
+        },
+      ];
+
+      const canvasEl = document.getElementById('responsive-canvas');
+      const titleEl = document.getElementById('responsive-title');
+      const subtitleEl = document.getElementById('responsive-subtitle');
+      const mediaQuery = window.matchMedia('(min-width: 768px)');
+
+      function updateText(isDesktop) {
+        titleEl.textContent = isDesktop
+          ? 'Desktop Experience (Blue)'
+          : 'Mobile Experience (Red)';
+        subtitleEl.textContent = isDesktop
+          ? 'Loading the blue image sequence for desktop viewports (≥ 768px)'
+          : 'Loading the red image sequence for mobile viewports (< 768px)';
+      }
+
+      // Set initial attributes before initializing ScrollsequenceManager
+      const initialDesktop = mediaQuery.matches;
+      updateText(initialDesktop);
+      canvasEl.setAttribute(
+        'data-ssq-media-groups',
+        JSON.stringify(initialDesktop ? desktopMediaGroups : mobileMediaGroups)
+      );
+
+      ScrollsequenceManager.initialize().preloadAll();
+
+      // Switch sequence and text dynamically when crossing the breakpoint
+      mediaQuery.addEventListener('change', (e) => {
+        const isDesktop = e.matches;
+        updateText(isDesktop);
+        ScrollsequenceManager.createBlock(canvasEl, {
+          mediaGroups: isDesktop ? desktopMediaGroups : mobileMediaGroups,
+        });
+        ScrollsequenceManager.preloadBlock(canvasEl);
+      });
+    </script>
+  </body>
+</html>
+

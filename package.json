@@ -1,0 +1,19 @@
+{
+  "name": "scrollsequence-examples-workspace",
+  "version": "2.0.0-beta.53",
+  "private": true,
+  "type": "module",
+  "description": "Scrollsequence interactive examples and showcase repository",
+  "workspaces": [
+    "react",
+    "vanilla"
+  ],
+  "scripts": {
+    "dev:react": "npm --prefix react run dev",
+    "dev:vanilla": "npm --prefix vanilla run dev",
+    "build:react": "npm --prefix react run build",
+    "build:vanilla": "npm --prefix vanilla run build",
+    "build": "npm run build --workspaces",
+    "media:process": "node _media/media-processor.js"
+  }
+}

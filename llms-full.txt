@@ -1,0 +1,362 @@
+# Scrollsequence - Complete LLM & Agent Knowledge Base
+
+Scrollsequence is an ultra-performant, cross-platform engine for cinematic video-scroll animations, 3D WebGL depth displacement, and scroll-synchronized interactive web content.
+
+## 1. Quick Installation & Setup
+
+> **Public Beta Notice**: While official NPM registry listing is pending trademark finalization, Scrollsequence is installed directly via pre-packaged `.tgz` URL. Standard imports (e.g. `scrollsequence/react`) work identically once installed.
+
+### React
+```bash
+npm install scrollsequence@https://docs.scrollsequence.com/scrollsequence-2.0.0-beta.53.tgz react react-dom
+```
+In your app's root or component:
+```tsx
+import { Canvas2d, Scene, Layer } from 'scrollsequence/react';
+```
+
+### Vanilla JavaScript
+```bash
+npm install scrollsequence@https://docs.scrollsequence.com/scrollsequence-2.0.0-beta.53.tgz
+```
+In your script:
+```javascript
+import ScrollsequenceManager from 'scrollsequence';
+import 'scrollsequence/scrollsequence.css';
+ScrollsequenceManager.initialize().preloadAll();
+```
+
+---
+
+## 2. Core Concepts
+
+### A. Media Groups & Manifests
+Scrollsequence loads image sequences through `mediaGroups`. Each media group represents an image sequence with responsive resolution variants:
+```json
+{
+  "type": "manifest",
+  "rootDir": "https://cdn.example.com/sequence-folder/",
+  "isReverse": false,
+  "imageSizes": {
+    "1280": {
+      "width": 1280,
+      "height": 720,
+      "files": {
+        "i": "1280/%04d.jpg"
+      },
+      "frameCount": 293
+    },
+    "1920": {
+      "width": 1920,
+      "height": 1080,
+      "files": {
+        "i": "1920/%04d.jpg",
+        "d": "depthmaps/%04d.jpg"
+      },
+      "frameCount": 293
+    }
+  }
+}
+```
+- `"i"`: Image format pattern (e.g. `%04d.jpg` matches `0001.jpg`, `0002.jpg`, etc.).
+- `"d"`: Optional depth map format pattern for WebGL 2.5D parallax displacement.
+- `rootDir`: Base URL or relative path where image files are hosted.
+
+---
+
+## 3. Complete Code Examples
+
+### Example 1: Canvas2D Minimal (React)
+Path: `examples/react/src/examples/CanvasMinimal.tsx`
+```tsx
+import { Canvas2d } from 'scrollsequence/react';
+
+export default function CanvasMinimal() {
+  return (
+    <main className="min-h-screen bg-neutral-950 text-white">
+      <section className="h-[50vh] flex items-center justify-center text-neutral-400">
+        <p className="text-lg">Scroll down to start sequence ↓</p>
+      </section>
+
+      <Canvas2d
+        mediaGroups={[
+          {
+            type: 'manifest',
+            rootDir: 'https://cdn.scrollsequence.com/2026-09/dna-blue/',
+            imageSizes: {
+              1920: {
+                width: 1920,
+                height: 1080,
+                files: {
+                  i: '1920/%04d.jpg',
+                },
+                frameCount: 293,
+              },
+            },
+          },
+        ]}
+      />
+
+      <section className="h-screen flex items-center justify-center text-neutral-400">
+        <p className="text-lg">Sequence ended, continue reading...</p>
+      </section>
+    </main>
+  );
+}
+```
+
+### Example 2: Pinned Scene Showcase (React)
+Path: `examples/react/src/examples/SceneMinimal.tsx`
+```tsx
+import { Scene, Layer, Canvas2d } from 'scrollsequence/react';
+
+export default function SceneMinimal() {
+  return (
+    <main className="min-h-screen bg-neutral-950 text-white">
+      <section className="h-[50vh] flex items-center justify-center text-neutral-400">
+        <p className="text-lg">Scroll down to start sequence ↓</p>
+      </section>
+
+      <Scene>
+        <Layer>
+          <Canvas2d
+            mediaGroups={[
+              {
+                type: 'manifest',
+                rootDir: 'https://cdn.scrollsequence.com/2026-09/dna-blue/',
+                imageSizes: {
+                  1920: {
+                    width: 1920,
+                    height: 1080,
+                    files: {
+                      i: '1920/%04d.jpg',
+                    },
+                    frameCount: 293,
+                  },
+                },
+              },
+            ]}
+          />
+        </Layer>
+        <Layer placement="center center">
+          <div className="text-center px-4">
+            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight">
+              Cinematic Scroll
+            </h1>
+            <p className="mt-3 text-lg sm:text-xl text-neutral-300">
+              60 FPS Hardware-Accelerated Scrubbing
+            </p>
+          </div>
+        </Layer>
+      </Scene>
+
+      <section className="h-screen flex items-center justify-center text-neutral-400">
+        <p className="text-lg">Sequence ended, continue reading...</p>
+      </section>
+    </main>
+  );
+}
+```
+
+### Example 3: HTML Content Animations (React)
+Path: `examples/react/src/examples/SceneContent.tsx`
+```tsx
+import { Scene, Layer, Canvas2d } from 'scrollsequence/react';
+
+export default function SceneContent() {
+  return (
+    <main className="min-h-screen bg-neutral-950 text-white">
+      <section className="h-[50vh] flex flex-col items-center justify-center text-center px-4 text-neutral-400">
+        <h2 className="text-xl font-semibold text-white">Scroll down to start sequence ↓</h2>
+        <p className="mt-2 text-sm max-w-lg">
+          We have two media groups. The progress bar is attached to the global Scene timeline,
+          and the content animation is attached to the media group.
+        </p>
+      </section>
+
+      <Scene
+        contentAnimations={{
+          onScroll: [
+            {
+              selector: '.animation-attached-to-global-scene-progress',
+              track: {
+                0: { width: 'calc(0% + 2px)' },
+                1: { width: 'calc(100% - 2px)' },
+              },
+            },
+          ],
+        }}
+        triggerStart={1}
+        triggerEnd={0}
+      >
+        <Layer>
+          <Canvas2d
+            mediaGroups={[
+              {
+                type: 'manifest',
+                rootDir: 'https://cdn.scrollsequence.com/2026-09/dna-blue/',
+                imageSizes: {
+                  1920: {
+                    width: 1920,
+                    height: 1080,
+                    files: {
+                      i: '1920/%04d.jpg',
+                    },
+                    frameCount: 293,
+                  },
+                },
+                contentAnimations: {
+                  onScroll: [
+                    {
+                      selector: '.animation-attached-to-first-media-group',
+                      track: {
+                        0: { opacity: 0, y: '100px', scale: 0.8 },
+                        0.25: { opacity: 1, y: 0, scale: 1 },
+                        0.75: { opacity: 1, y: 0, scale: 1 },
+                        1: { opacity: 0, y: '-100px', scale: 0.8 },
+                      },
+                    },
+                  ],
+                },
+              },
+              {
+                type: 'manifest',
+                rootDir: 'https://cdn.scrollsequence.com/2026-09/dna-blue/',
+                isReverse: true,
+                imageSizes: {
+                  1920: {
+                    width: 1920,
+                    height: 1080,
+                    files: {
+                      i: '1920/%04d.jpg',
+                    },
+                    frameCount: 293,
+                  },
+                },
+              },
+            ]}
+          />
+        </Layer>
+
+        <Layer placement="top left">
+          <div className="w-full">
+            <div className="animation-attached-to-global-scene-progress h-1 bg-red-500" />
+          </div>
+        </Layer>
+
+        <Layer placement="center center">
+          <div className="animation-attached-to-first-media-group text-center px-4">
+            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight">
+              Animate Any HTML Content
+            </h1>
+            <p className="mt-3 text-lg sm:text-xl text-neutral-300">
+              Sync typography, UI layers, and progress indicators directly to scroll
+            </p>
+          </div>
+        </Layer>
+      </Scene>
+
+      <section className="h-screen flex items-center justify-center text-neutral-400">
+        <p className="text-lg">Sequence ended, continue reading...</p>
+      </section>
+    </main>
+  );
+}
+```
+
+### Example 4: Depth Map Parallax (React)
+Path: `examples/react/src/examples/SceneDepth.tsx`
+```tsx
+import { Scene, Layer, Canvas2d } from 'scrollsequence/react';
+
+export default function SceneDepth() {
+  return (
+    <main className="min-h-screen bg-neutral-950 text-white">
+      <section className="h-[50vh] flex items-center justify-center text-neutral-400">
+        <p className="text-lg">Scroll down to start sequence ↓</p>
+      </section>
+
+      <Scene>
+        <Layer>
+          <Canvas2d
+            mediaGroups={[
+              {
+                type: 'manifest',
+                rootDir: 'https://cdn.scrollsequence.com/2026-09/dna-blue/',
+                imageSizes: {
+                  1920: {
+                    width: 1920,
+                    height: 1080,
+                    files: {
+                      i: '1920/%04d.jpg',
+                      d: 'depthmaps/%04d.jpg',
+                    },
+                    frameCount: 293,
+                  },
+                },
+              },
+            ]}
+          />
+        </Layer>
+        <Layer placement="center center">
+          <div className="text-center px-4">
+            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight">
+              Cinematic Depth & Parallax
+            </h1>
+            <p className="mt-3 text-lg sm:text-xl text-neutral-300">
+              Hardware-accelerated 2.5D depth map simulation
+            </p>
+          </div>
+        </Layer>
+      </Scene>
+
+      <section className="h-screen flex items-center justify-center text-neutral-400">
+        <p className="text-lg">Sequence ended, continue reading...</p>
+      </section>
+    </main>
+  );
+}
+```
+
+### Example 5: Vanilla JavaScript Minimal
+Path: `examples/vanilla/canvas-minimal.html`
+```html
+<link rel="stylesheet" href="scrollsequence/scrollsequence.css" />
+
+<div
+  class="scrollsequence-canvas2d"
+  data-ssq-media-groups='[{"type":"manifest","rootDir":"https://cdn.scrollsequence.com/2026-09/dna-blue/","imageSizes":{"1920":{"width":1920,"height":1080,"files":{"i":"1920/%04d.jpg"},"frameCount":293}}}]'
+>
+  <canvas></canvas>
+</div>
+
+<script type="module">
+  import ScrollsequenceManager from 'scrollsequence';
+  ScrollsequenceManager.initialize().preloadAll();
+</script>
+```
+
+### Example 6: Vanilla JavaScript Pinned Scene
+Path: `examples/vanilla/scene-minimal.html`
+```html
+<link rel="stylesheet" href="scrollsequence/scrollsequence.css" />
+
+<div class="scrollsequence-scene" style="--ssq-height: 200vh;">
+  <div class="scrollsequence-layer">
+    <div
+      class="scrollsequence-canvas2d"
+      data-ssq-media-groups='[{"type":"manifest","rootDir":"https://cdn.scrollsequence.com/2026-09/dna-blue/","imageSizes":{"1920":{"width":1920,"height":1080,"files":{"i":"1920/%04d.jpg"},"frameCount":293}}}]'
+    >
+      <canvas></canvas>
+    </div>
+  </div>
+  <div class="scrollsequence-layer" data-ssq-placement="center center">
+    <h1>Cinematic Scroll</h1>
+  </div>
+</div>
+
+<script type="module">
+  import ScrollsequenceManager from 'scrollsequence';
+  ScrollsequenceManager.initialize().preloadAll();
+</script>
+```

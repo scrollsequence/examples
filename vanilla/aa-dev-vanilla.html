@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Development Sandbox - Scrollsequence Vanilla JS</title>
+    <meta name="description" content="Development sandbox for testing scene attributes and pinning in Scrollsequence Vanilla JS." />
+    <link rel="stylesheet" href="scrollsequence/scrollsequence.css" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body class="min-h-screen bg-neutral-950 text-white">
+    <!-- Spacer before sequence -->
+    <section class="h-[50vh] flex items-center justify-center text-neutral-400">
+      <p class="text-lg">Scroll down to start sequence ↓ DEV</p>
+    </section>
+
+    <!-- Pinned Scrollsequence Scene -->
+    <div class="scrollsequence-scene" id="my-scene">
+      <div class="scrollsequence-scene_inner">
+        <div class="scrollsequence-layer">
+          <div
+            class="scrollsequence-canvas2d" id="my-canvas"
+            data-ssq-media-groups='[{"type":"manifest","rootDir":"https://cdn.scrollsequence.com/2026-09/dna-blue/","imageSizes":{"1920":{"width":1920,"height":1080,"files":{"i":"1920/%04d.jpg"},"frameCount":293}}}]'
+          >
+            <canvas></canvas>
+          </div>
+        </div>
+        <div class="scrollsequence-layer">
+          <div class="text-center px-4">
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight">
+              Cinematic Scroll!
+            </h1>
+            <p class="mt-3 text-lg sm:text-xl text-neutral-300">
+              60 FPS Hardware-Accelerated Scrubbing
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spacer after sequence -->
+    <section class="h-screen flex items-center justify-center text-neutral-400">
+      <p className="text-lg">Sequence ended, continue reading...</p>
+    </section>
+
+    <!-- Floating Progress Control Bar (Option 1) -->
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-neutral-900/90 backdrop-blur-md border border-neutral-700 rounded-xl px-5 py-3 shadow-2xl flex items-center gap-4 text-sm font-sans">
+      <div class="flex items-center gap-2">
+        <label for="target-select" class="text-neutral-400">Target:</label>
+        <select id="target-select" class="bg-neutral-800 border border-neutral-700 text-white rounded px-2 py-1 text-xs focus:outline-none cursor-pointer">
+          <option value="scene">Scene</option>
+          <option value="canvas">Canvas</option>
+        </select>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <label for="prog-slider" class="text-neutral-400">Progress:</label>
+        <input type="range" id="prog-slider" min="0" max="1" step="0.001" value="0" class="w-48 accent-blue-500 cursor-pointer" />
+        <span id="prog-val" class="font-mono text-neutral-300 w-12 text-right">0.000</span>
+      </div>
+
+      <button id="prog-reset" class="bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors cursor-pointer">
+        Reset to Scroll
+      </button>
+    </div>
+
+    <script type="module">
+      import ScrollsequenceManager from 'scrollsequence';
+      import 'scrollsequence/scrollsequence.css';
+      ScrollsequenceManager.initialize().preloadAll();
+
+      // get a specific scene block by id 
+      const sceneElement = document.getElementById('my-scene');
+      const sceneBlock = ScrollsequenceManager.getBlock(sceneElement);
+      console.log('sceneBlock', sceneBlock);
+      // get a specific canvas block by id 
+      const canvasElement = document.getElementById('my-canvas')
+      const canvasBlock = ScrollsequenceManager.getBlock(canvasElement);
+      console.log('canvasBlock', canvasBlock);
+
+      window.canvasBlock = canvasBlock; // just for browser playing around
+      window.sceneBlock = sceneBlock; // just for browser playing around
+
+      // --- Progress Control UI ---
+      const slider = document.getElementById('prog-slider');
+      const valLabel = document.getElementById('prog-val');
+      const resetBtn = document.getElementById('prog-reset');
+      const targetSelect = document.getElementById('target-select');
+
+      const getTargetBlock = () => targetSelect.value === 'scene' ? sceneBlock : canvasBlock;
+
+      slider.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        valLabel.textContent = val.toFixed(3);
+        getTargetBlock()?.progress(val);
+      });
+
+      resetBtn.addEventListener('click', () => {
+        // null resets isControlled = false, returning authority to scroll
+        sceneBlock?.progress(null);
+        canvasBlock?.progress(null);
+        valLabel.textContent = 'scroll';
+      });
+    </script>
+  </body>
+</html>
